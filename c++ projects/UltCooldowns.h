@@ -1,4 +1,8 @@
-Aatrox/ 120 / 100 / 80 / 
+#include <string>
+#include <iostream>
+using namespace std;
+
+string UltCooldowns = R"/(Aatrox/ 120 / 100 / 80 / 
 Ahri/ 130 / 105 / 80 / 
 Akali/ 100 / 80 / 60 / 
 Akshan/ 100 / 85 / 70 / 
@@ -17,7 +21,7 @@ Braum/ 120 / 100 / 80 /
 Caitlyn/ 90 / 75 / 60 /
 Camille/ 140 / 115 / 90 /
 Cassiopeia/ 120 / 100 / 80 /
-Cho'Gath/ 80 / 80 / 80 /
+ChoGath/ 80 / 80 / 80 /
 Corki/ 240 / 240 / 240 /
 Darius/ 120 / 100 / 80 /
 Diana/ 100 / 90 / 80 /
@@ -48,7 +52,7 @@ Jax/ 80 / 80 / 80 /
 Jayce/ 6 / 6 / 6 /
 Jhin/ 120 / 105 / 90 /
 Jinx/ 90 / 75 / 60 /
-Kai'Sa/ 130 / 100 / 70 /
+KaiSa/ 130 / 100 / 70 /
 Kalista/ 150 / 120 / 90 /
 Karma/ 40 / 36 / 34 /
 Karthus/ 200 / 180 / 160 /
@@ -60,7 +64,7 @@ Kennen/ 120 / 120 / 120 /
 Kha'Zix/ 100 / 85 / 70 /
 Kindred/ 180 / 150 / 120 /
 Kled/ 160 / 140 / 120 /
-Kog'Maw/ 2 / 1.5 / 1 /
+KogMaw/ 2 / 1.5 / 1 /
 LeBlanc/ 60 / 45 / 30 /
 LeeSin/ 110 / 85 / 60 /
 Leona/ 90 / 75 / 60 /
@@ -93,7 +97,7 @@ Qiyana/ 120 / 120 / 120 /
 Quinn/ 3 / 3 / 3 /
 Rakan/ 130 / 110 / 90 /
 Rammus/ 110 / 95 / 80 /
-Rek'Sai/ 100 / 90 / 80 /
+RekSai/ 100 / 90 / 80 /
 Rell/ 120 / 100 / 80 /
 Renekton/ 120 / 120 / 120 /
 Rengar/ 110 / 90 / 70 /
@@ -133,7 +137,7 @@ Urgot/ 100 / 85 / 70 /
 Varus/ 100 / 80 / 60 /
 Vayne/ 100 / 85 / 70 /
 Veigar/ 120 / 90 / 60 /
-Vel'Koz/ 120 / 100 / 80 /
+VelKoz/ 120 / 100 / 80 /
 Vi/ 120 / 100 / 80 /
 Viego/ 120 / 100 / 80 /
 Viktor/ 120 / 100 / 80 /
@@ -152,4 +156,4 @@ Zac/ 130 / 115 / 100 /
 Zed/ 120 / 90 / 60 /
 Ziggs/ 120 / 95 / 70 /
 Zilean/ 120 / 90 / 60 /
-Zyra/ 110 / 100 / 90 /
+Zyra/ 110 / 100 / 90 /)"
