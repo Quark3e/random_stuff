@@ -1,9 +1,6 @@
 #include <windows.h>
 #include <shlobj.h>
 #include <iostream>
-#include <objbase.h>
-
-
 using namespace std;
 
 int main()
