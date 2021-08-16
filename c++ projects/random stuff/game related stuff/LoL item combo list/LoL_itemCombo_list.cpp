@@ -9,8 +9,11 @@ using namespace std;
 
 int main() {
     bool loopVal = true;
+    int options;
 
-    while(loopVal)
+    while(loopVal) {
+        
+    }
 
     return 0;
 }
