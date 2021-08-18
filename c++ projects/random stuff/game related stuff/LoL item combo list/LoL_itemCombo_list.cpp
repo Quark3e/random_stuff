@@ -160,7 +160,7 @@ int itemCombo(string item1_mythic,string item2_legen,string item3_legen,string i
 int abilityType_StringToInt(string abilityType) {
     int abilityTypeVar = 0;
     int false_check = 1;
-
+    
     itemPrefix_specifier(abilityType);
 
     if (abilityType == "AttackDamage") {
