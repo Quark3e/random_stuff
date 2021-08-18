@@ -24,10 +24,34 @@ int main() {
         cout << "Options:\n1.See item stat from item\n";
         cout << "2.Get a sum of stat from 1 mythic and 4 legendary items\n";
         cout << "3.Get best combination of 1 Mythic and 4 Legendary items for a certain item stat\n";
+        cout << "4.Exit program\n"
         cout << "Enter option: ";
         cin >> options;
-
-        switch (options)
+        if (cin.fail()) {
+            cout << options << " :is an invalid answer."
+            cin.clear();
+            cin.ignore();
+        }
+        switch (options) {
+            case 1:
+                option1();
+                Sleep(1500);
+                break;
+            case 2:
+                option2();
+                Sleep(1500);
+                break;
+            case 3:
+                option3();
+                Sleep(1500);
+                break;
+            case 4:
+                cout << "exiting.";
+                for(int i=0; i<=2; i++) {Sleep(800); cout << " .";}
+                return 0;
+            default:
+                cout << options << " is an invalid answer.\n";
+        }
         
         cout << "\n-------------\n";
         if (cin.fail()) {
@@ -44,16 +68,32 @@ void option1() {
     string abilityType;
     cout << "Enter item name: ";
     cin >> itemName;
-    cout << "\nEnter what type of stat you want: ";
+    cout << "\nEnter what type of item stat you want: ";
     cin >> abilityType;
     
     int answer = itemStat(itemRow_finder(itemName), abilityType_StringToInt(abilityType));
+    if (answer = 69) {return 0;}
     cout << itemName << ": " << abilityType << "=\n";
     cout << answer << endl;
 
 }
 void option2() {
     //Get a total (certain stat) value for 5 items from item names and abilityType.
+    string MythicItem;
+    string LegenItem1;
+    string LegenItem2;
+    string LegenItem3;
+    string LegenItem4;
+    string abilityType;
+    cout << "Enter 1 Mythic and 4 Legendary items: ";
+    cin >> MythicItem >> LegenItem1 >> LegenItem2 >> LegenItem3 >> LegenItem4;
+    cout << "\nProcessing.";
+    for (int i=0; i<=3; i++) {
+        cout << " .";
+
+        Sleep(800);
+    }
+
 }
 
 void option3() {
@@ -61,11 +101,31 @@ void option3() {
 
 }
 
-int get_itemStat(string itemName, string abilityType) {
-    int itemStat;
-
-
-    return itemStat;
+int itemCombo(string item1_mythic,string item2_legen,string item3_legen,string item4_legen,string item5_legen,string abilityType){
+    //build item stat sum of 5 items (1 mythic, 4 legendary)
+    int answer;
+    int failed_returnVal = 69;
+    answer = itemStat(itemRow_finder(item1_mythic), abilityType_StringToInt(abilityType));
+    if (answer = 69) {bastardMisspelled(); return failed_returnVal;}
+    itemsStatArray[0] = answer;
+    itemsNameArray[0] = ;
+    answer = itemStat(itemRow_finder(item2_legen), abilityType_StringToInt(abilityType));
+    if (answer = 69) {bastardMisspelled(); return failed_returnVal;}
+    itemsStatArray[1] = answer;
+    itemsNameArray[1] = ;
+    answer = itemStat(itemRow_finder(item2_legen), abilityType_StringToInt(abilityType));
+    if (answer = 69) {bastardMisspelled(); return failed_returnVal;}
+    itemsStatArray[2] = answer;
+    itemsNameArray[2] = ;
+    answer = itemStat(itemRow_finder(item2_legen), abilityType_StringToInt(abilityType));
+    if (answer = 69) {bastardMisspelled(); return failed_returnVal;}
+    itemsStatArray[3] = answer;
+    itemsNameArray[3] = ;
+    answer = itemStat(itemRow_finder(item2_legen), abilityType_StringToInt(abilityType));
+    if (answer = 69) {bastardMisspelled(); return failed_returnVal;}
+    itemsStatArray[4] = answer;
+    itemsNameArray[4] = ;
+    return 0;
 }
 
 int abilityType_StringToInt(string abilityType) {
@@ -114,10 +174,12 @@ int itemRow_finder(string itemName) {
 }
 
 int itemStat(int rowLine, string abilityType) {
-    int returnVal;
+    int itemStat;
+    int return_failed;
     string s = stringFinder(rowLine);
     int ItemStatType = abilityType_StringToInt(abilityType);
-    if (ItemStatType == 69) {cout << "ya misspelled the item stat you want fucko. Start again"; exit;}
+    if (s == "69") {cout << "bastard misspelled the item name"; return_failed = 69; return return_failed;}
+    if (ItemStatType == 69) {cout << "ya misspelled the item stat fucko. Start again"; exit;}
     int loopCount = 0;
     string delimiter = "/";
     size_t pos = 0;
@@ -130,13 +192,15 @@ int itemStat(int rowLine, string abilityType) {
         loopCount = loopCount + 1;
         if (loopCount >= ItemStatType) {break;}
     }
-    if (ItemStatType>1) {returnVal = stoi(token);}
-    else {returnVal = 0;}
-    return returnVal;
+    if (ItemStatType>1) {itemStat = stoi(token);}
+    else {itemStat = 0;}
+    return itemStat;
 }
 
 string stringFinder(int rowLine) {
     string line;
+    string failed_returnVal;
+    if (rowLine == 0) {failed_returnVal = "69"; return failed_returnVal;}
     ifstream myfile("itemList.txt");
     if (myfile.is_open()) {
         for (int i=1; i<=rowLine; i++) {
@@ -148,4 +212,9 @@ string stringFinder(int rowLine) {
     return line;
 }
 
+void bastardMisspelled() {
+        cout << "trade offer: You misspell one item. I get to make you redo it.\n";
+        Sleep(500);
+        cout << "redo it\n";
+}
 //champion/ad/ap/crit/atk/leth/armorPen/omnivamp/lifesteal/abilityHaste/health/mana/armor/mr/healthRegen/manaRegen/apPen
