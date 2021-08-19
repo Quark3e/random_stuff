@@ -4,7 +4,7 @@
 #include <string>
 #include <math.h>
 #include <windows.h>
-//#include "itemList.h"
+#include "highestStatFinder.h"
 using namespace std;
 
 int itemCombo(string item1_mythic,string item2_legen,string item3_legen,string item4_legen,string item5_legen,string abilityType);
@@ -119,8 +119,10 @@ void option2() {
 
 void option3() {
     //Find best combination of 1 mythic and 4 legendary to get an item stat as high as possible.
-
+    
 }
+
+
 
 int itemCombo(string item1_mythic,string item2_legen,string item3_legen,string item4_legen,string item5_legen,string abilityType) {
     //build item stat sum of 5 items (1 mythic, 4 legendary)
