@@ -23,6 +23,9 @@ void option3();
 
 int itemsStatArray[6];
 string itemsNameArray[6];
+int comboItemStatArray[6];
+string comboItemNameArray[6];
+double comboVal;
 string itemPrefix;
 int itemStatusNumber;
 
@@ -119,10 +122,15 @@ void option2() {
 
 void option3() {
     //Find best combination of 1 mythic and 4 legendary to get an item stat as high as possible.
-    
+    string AbilityType;
+
+
 }
 
-
+void randomItemSelector() {
+    //Edit's the global comboItemNameArray[] with 1 mythical and 4 Legendary items. Then edits the global comboVal
+    //variable with the 
+}
 
 int itemCombo(string item1_mythic,string item2_legen,string item3_legen,string item4_legen,string item5_legen,string abilityType) {
     //build item stat sum of 5 items (1 mythic, 4 legendary)
