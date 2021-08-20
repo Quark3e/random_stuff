@@ -13,6 +13,8 @@ int itemRow_finder(string itemName);
 int itemStat(int rowLine, string abilityType);
 string stringFinder(int rowLine);
 void itemPrefix_specifier(string abilityspecifier);
+void highestStat_Finder(string abilityType, string itemType);
+string getItemName_fromrowLine(int rowLine);
 int totalItemStatCalculator();
 void bastardMisspelled();
 
@@ -20,6 +22,7 @@ void bastardMisspelled();
 void option1();
 void option2();
 void option3();
+void option4();
 
 int itemsStatArray[6];
 string itemsNameArray[6];
@@ -31,6 +34,7 @@ string itemPrefix;
 int itemStatusNumber;
 int arrayWhatToShow = 0;
 
+int generalValueforOption3;
 
 int main() {
     bool loopVal = true;
@@ -141,8 +145,10 @@ void option3() {
     if(arrayWhatToShow == 0) {cout << " is:\n";}
     else{cout << " are:\n";} 
     for(int i=0; i<=arrayWhatToShow; i++) {
-        cout << highestStatItemName_Array[i] << "\n";
+        cout << "-" << highestStatItemName_Array[i] << "\n";
     }
+    itemPrefix_specifier(abilityType);
+    cout << "with " << generalValueforOption3 << itemPrefix << endl;
 
 }
 
@@ -162,15 +168,15 @@ void randomItem_Selector() {
 void highestStat_Finder(string abilityType, string itemType) {
     int var1;
     int var2;
-    int i = 1;
+    int i = 2;
     int arrayCount = 0;
     arrayWhatToShow = 0;
     string currentStatus = "notEqual";
     
     if (itemType == "Mythic") {
         var1 = itemStat(i, abilityType);
-        highestStatItemName_Array[0] = getItemName_fromrowLine(i);
-        for(i=2; i<=23; i++) {
+        highestStatItemName_Array[0] = getItemName_fromrowLine(i-1);
+        for(i=3; i<=24; i++) {
             var2 = itemStat(i, abilityType);
             //string function_result = Comparer_bigger(var1, var2);
             if(var1>var2) {
@@ -178,31 +184,32 @@ void highestStat_Finder(string abilityType, string itemType) {
                 }
             else if(var1<var2) {
                 //represents current/new line
-                highestStatItemName_Array[0] = getItemName_fromrowLine(i);
+                highestStatItemName_Array[0] = getItemName_fromrowLine(i-1);
                 arrayWhatToShow = 0;
                 arrayCount = 0;
                 currentStatus = "notEqual";
+                generalValueforOption3 = var2;
                 var1 = var2;
                 }
             else if(var1 == var2) {
                 if(currentStatus == "Equal") {
                     arrayWhatToShow++;
                     arrayCount++;
-                    highestStatItemName_Array[arrayCount] = getItemName_fromrowLine(i);
+                    highestStatItemName_Array[arrayCount] = getItemName_fromrowLine(i-1);
                 }
                 else if(currentStatus == "notEqual") {
                     currentStatus = "Equal";
                     arrayWhatToShow++;
                     arrayCount++;
-                    highestStatItemName_Array[arrayCount] = getItemName_fromrowLine(i);
+                    highestStatItemName_Array[arrayCount] = getItemName_fromrowLine(i-1);
                 }
             }
         }
     }
     else if (itemType == "Legendary") {
         var1 = itemStat(i, abilityType);
-        highestStatItemName_Array[0] = getItemName_fromrowLine(i);
-        for(i=26; i<=89; i++) {
+        highestStatItemName_Array[0] = getItemName_fromrowLine(i-1);
+        for(i=27; i<=90; i++) {
             var2 = itemStat(i, abilityType);
             //string function_result = Comparer_bigger(var1, var2);
             if(var1>var2) {
@@ -210,7 +217,7 @@ void highestStat_Finder(string abilityType, string itemType) {
                 }
             else if(var1<var2) {
                 //represents current/new line
-                highestStatItemName_Array[0] = getItemName_fromrowLine(i);
+                highestStatItemName_Array[0] = getItemName_fromrowLine(i-1);
                 arrayWhatToShow = 0;
                 arrayCount = 0;
                 currentStatus = "notEqual";
@@ -220,13 +227,13 @@ void highestStat_Finder(string abilityType, string itemType) {
                 if(currentStatus == "Equal") {
                     arrayWhatToShow++;
                     arrayCount++;
-                    highestStatItemName_Array[arrayCount] = getItemName_fromrowLine(i);
+                    highestStatItemName_Array[arrayCount] = getItemName_fromrowLine(i-1);
                 }
                 else if(currentStatus == "notEqual") {
                     currentStatus = "Equal";
                     arrayWhatToShow++;
                     arrayCount++;
-                    highestStatItemName_Array[arrayCount] = getItemName_fromrowLine(i);
+                    highestStatItemName_Array[arrayCount] = getItemName_fromrowLine(i-1);
                 }
             }
         }
@@ -418,6 +425,7 @@ int itemStat(int rowLine, string abilityType) {
         s.erase(0, pos + delimiter.length());
         loopCount = loopCount + 1;
         if (loopCount >= ItemStatType) {break;}
+        //cout << token << endl;
     }
     if (ItemStatType>1) {itemStat = stoi(token);}
     else {itemStat = 0;}
