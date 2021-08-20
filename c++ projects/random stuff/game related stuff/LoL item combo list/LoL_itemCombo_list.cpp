@@ -28,7 +28,7 @@ int itemsStatArray[6];
 string itemsNameArray[6];
 int comboItemStatArray[6];
 string comboItemNameArray[6];
-string highestStatItemName_Array[10];
+string highestStatItemName_Array[100];
 double comboVal;
 string itemPrefix;
 int itemStatusNumber;
@@ -135,12 +135,14 @@ void option3() {
     //Find item with highest stat of a certain item stat.
     string abilityType;
     string itemType;
+    generalValueforOption3 = 0;
 
     cout << "\nEnter either Mythic or Legendary: ";
     cin >> itemType;
     cout << "\nEnter item stat to get highest item for: ";
     cin >> abilityType;
     highestStat_Finder(abilityType, itemType);
+    cout << arrayWhatToShow << endl;
     cout << "The item(s) with the highest " << abilityType;
     if(arrayWhatToShow == 0) {cout << " is:\n";}
     else{cout << " are:\n";} 
@@ -148,7 +150,7 @@ void option3() {
         cout << "-" << highestStatItemName_Array[i] << "\n";
     }
     itemPrefix_specifier(abilityType);
-    cout << "with " << generalValueforOption3 << itemPrefix << endl;
+    cout << "with " << generalValueforOption3 << " " << itemPrefix << endl;
 
 }
 
@@ -181,6 +183,7 @@ void highestStat_Finder(string abilityType, string itemType) {
             //string function_result = Comparer_bigger(var1, var2);
             if(var1>var2) {
                 //represents previous line
+                generalValueforOption3 = var1;
                 }
             else if(var1<var2) {
                 //represents current/new line
@@ -214,6 +217,7 @@ void highestStat_Finder(string abilityType, string itemType) {
             //string function_result = Comparer_bigger(var1, var2);
             if(var1>var2) {
                 //represents previous line
+                generalValueforOption3 = var1;
                 }
             else if(var1<var2) {
                 //represents current/new line
@@ -221,6 +225,7 @@ void highestStat_Finder(string abilityType, string itemType) {
                 arrayWhatToShow = 0;
                 arrayCount = 0;
                 currentStatus = "notEqual";
+                generalValueforOption3 = var2;
                 var1 = var2;
                 }
             else if(var1 == var2) {
