@@ -243,7 +243,7 @@ string getItemName_fromrowLine(int rowLine) {
         for(int i=0; i<=rowLine; i++) {
             getline(myfile, s);
             pos = s.find(delimiter);
-            itemName = s.substr(0, pos):
+            itemName = s.substr(0, pos);
             s.erase(0, pos + delimiter.length());
         }
     }
@@ -402,7 +402,6 @@ int itemRow_finder(string itemName) {
 
 int itemStat(int rowLine, string abilityType) {
     int itemStat;
-    int return_ReachedEndofFile;
     int return_failed;
     string s = stringFinder(rowLine);
     int ItemStatType = abilityType_StringToInt(abilityType);
@@ -419,7 +418,6 @@ int itemStat(int rowLine, string abilityType) {
         s.erase(0, pos + delimiter.length());
         loopCount = loopCount + 1;
         if (loopCount >= ItemStatType) {break;}
-        if (myfile.eof()) {return_ReachedEndofFile = 420; return return_failed;}
     }
     if (ItemStatType>1) {itemStat = stoi(token);}
     else {itemStat = 0;}

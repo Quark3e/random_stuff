@@ -102,16 +102,5 @@ double comboValEditor(string itemName) {
     return returnComboVal;
 }
 
-string Comparer_bigger(int val1, int val2) {
-    string resultString;
-
-    if(val1 == val2) {result = "equal";}
-    else if(val1 > val2) {result = "left";}
-    else if(val1 < val2) {result = "right";}
-    else {result = "shit";}
-
-    return resultString;
-}
-
 
 //champion/ad/ap/crit/atk/leth/armorPen/omnivamp/lifesteal/abilityHaste/health/mana/armor/mr/healthRegen/manaRegen/apPen
