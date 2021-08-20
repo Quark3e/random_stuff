@@ -25,6 +25,7 @@ int itemsStatArray[6];
 string itemsNameArray[6];
 int comboItemStatArray[6];
 string comboItemNameArray[6];
+string highestItemStatArray[10];
 double comboVal;
 string itemPrefix;
 int itemStatusNumber;
@@ -37,12 +38,13 @@ int main() {
     while(loopVal) {
         cout << "Options:\n1.See item stat from item\n";
         cout << "2.Get a sum of stat from 1 mythic and 4 legendary items\n";
-        cout << "3.Get best combination of 1 Mythic and 4 Legendary items for a certain item stat\n";
-        cout << "4.Exit program\n";
+        cout << "3.Get item with the highest item stat\n";
+        cout << "4.Get best combination of 1 Mythic and 4 Legendary items for a certain item stat\n";
+        cout << "5.Exit program\n";
         cout << "Enter option: ";
         cin >> options;
         if (cin.fail()) {
-            cout << options << " :is an invalid answer.";
+            cout << options << " :is an invalid answer.\n";
             cin.clear();
             cin.ignore();
         }
@@ -60,6 +62,10 @@ int main() {
                 Sleep(1500);
                 break;
             case 4:
+                option4();
+                Sleep(1500);
+                break;
+            case 5:
                 cout << "exiting.";
                 for(int i=0; i<=1; i++) {Sleep(800); cout << " .";}
                 return 0;
@@ -121,15 +127,42 @@ void option2() {
 }
 
 void option3() {
+    //Find item with highest stat of a certain item stat.
+    string abilityType;
+
+    cout << "Enter item stat to get highest item for: ";
+    cin >> abilityType;
+    string highest_stat_item = highestStat_Finder(abilityType);
+}
+
+void option4() {
     //Find best combination of 1 mythic and 4 legendary to get an item stat as high as possible.
     string AbilityType;
 
 
 }
 
-void randomItemSelector() {
+void randomItem_Selector() {
     //Edit's the global comboItemNameArray[] with 1 mythical and 4 Legendary items. Then edits the global comboVal
-    //variable with the 
+    //variable with the comboValEditor() function
+
+}
+
+void highestStat_Finder(string abilityType) {
+    string itemName;
+    int var1;
+    int var2;
+
+
+    for(int rowLine;)
+
+        var1 = itemStat(rowLine, abilityType);
+        highestItemStatArray[rowLine];
+        if
+
+
+
+    return itemName;
 }
 
 int itemCombo(string item1_mythic,string item2_legen,string item3_legen,string item4_legen,string item5_legen,string abilityType) {
@@ -281,6 +314,7 @@ int itemRow_finder(string itemName) {
 
 int itemStat(int rowLine, string abilityType) {
     int itemStat;
+    int return_ReachedEndofFile;
     int return_failed;
     string s = stringFinder(rowLine);
     int ItemStatType = abilityType_StringToInt(abilityType);
@@ -297,6 +331,7 @@ int itemStat(int rowLine, string abilityType) {
         s.erase(0, pos + delimiter.length());
         loopCount = loopCount + 1;
         if (loopCount >= ItemStatType) {break;}
+        if (myfile.eof()) {return_ReachedEndofFile = 420; return return_failed;}
     }
     if (ItemStatType>1) {itemStat = stoi(token);}
     else {itemStat = 0;}
