@@ -102,5 +102,14 @@ double comboValEditor(string itemName) {
     return returnComboVal;
 }
 
+string Comparer(int val1, int val2) {
+    string result;
+
+    if(val1 == val2) {result = "equal";}
+    else if(val1 < val2) {result = "";}
+
+    return result;
+}
+
 
 //champion/ad/ap/crit/atk/leth/armorPen/omnivamp/lifesteal/abilityHaste/health/mana/armor/mr/healthRegen/manaRegen/apPen
