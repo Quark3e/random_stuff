@@ -103,14 +103,14 @@ double comboValEditor(string itemName) {
 }
 
 string Comparer_bigger(int val1, int val2) {
-    string result;
+    string resultString;
 
     if(val1 == val2) {result = "equal";}
-    else if(val1 < val2) {result = "val1";}
-    else if(val1 > val2) {result = "val2";}
+    else if(val1 > val2) {result = "left";}
+    else if(val1 < val2) {result = "right";}
     else {result = "shit";}
 
-    return result;
+    return resultString;
 }
 
 
