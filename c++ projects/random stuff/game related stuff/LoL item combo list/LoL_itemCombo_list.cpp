@@ -72,7 +72,7 @@ int main() {
                 break;
             case 5:
                 cout << "exiting.";
-                for(int i=0; i<=1; i++) {Sleep(800); cout << " .";}
+                for(int i=0; i<=1; i++) {Sleep(250); cout << " .";}
                 return 0;
             default:
                 cout << options << " is an invalid answer.\n";
@@ -161,10 +161,12 @@ void option4() {
 
 }
 
-void randomItem_Selector() {
-    //Edit's the global comboItemNameArray[] with 1 mythical and 4 Legendary items. Then edits the global comboVal
-    //variable with the comboValEditor() function
+int randomItem_Selector(string itemType) {
+    //Returns a rowLine for a random item depending on the itemType (either mythic or legendary)
+    int rowLine;
+    
 
+    return rowLine;
 }
 
 void highestStat_Finder(string abilityType, string itemType) {
@@ -291,11 +293,6 @@ int itemCombo(string item1_mythic,string item2_legen,string item3_legen,string i
     itemsStatArray[4] = itemStatusNumber;
     itemsNameArray[4] = item5_legen;
 
-    // for (int i=0; i<5; i++) {
-    //     cout << "\n" << itemsNameArray[i];
-    //     cout << itemsStatArray[i];
-    //     cout << "-.-.-.-.-";
-    // }
     itemStatusNumber = 0;
     return 0;
 }
@@ -450,7 +447,6 @@ string stringFinder(int rowLine) {
         }
         myfile.close();
     }
-
     return line;
 }
 
@@ -471,7 +467,6 @@ void itemPrefix_specifier(string abilityspecifier) {
     else if (abilityspecifier == "HealthRegen") {itemPrefix = "%. Health regen.";}
     else if (abilityspecifier == "ManaRegen") {itemPrefix = "%. Mana regen.";}
     else if (abilityspecifier == "ApPenetration") {itemPrefix = "%. AP pen";}
-
 }
 
 int totalItemStatCalculator() {
