@@ -4,6 +4,7 @@
 #include <string>
 #include <math.h>
 #include <windows.h>
+#include <time.h>
 #include "highestStatFinder.h"
 using namespace std;
 
@@ -164,12 +165,20 @@ void option4() {
 int randomItem_Selector(string itemType) {
     //Returns a rowLine for a random item depending on the itemType (either mythic or legendary)
     int rowLine;
-    
+    srand (time(NULL));
+    Sleep(200);
+    if(itemType == "Mythic") {
+        rowLine = rand() % 23 + 2; //24
+
+    }
+    else if(itemType == "Legendary") {
+        rowLine = rand() % 64 + 27 //90
+    }
 
     return rowLine;
 }
 
-void highestStat_Finder(string abilityType, string itemType) {
+void highestStat_Finder(string abilityType, string itemType, string ignoreItem) {
     int var1;
     int var2;
     int i = 2;
