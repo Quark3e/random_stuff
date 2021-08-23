@@ -19,7 +19,6 @@ string getItemName_fromrowLine(int rowLine);
 int totalItemStatCalculator();
 void bastardMisspelled();
 
-
 void option1();
 void option2();
 void option3();
