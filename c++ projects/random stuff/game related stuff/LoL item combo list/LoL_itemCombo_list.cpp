@@ -12,9 +12,10 @@ int itemCombo(string item1_mythic,string item2_legen,string item3_legen,string i
 int abilityType_StringToInt(string abilityType);
 int itemRow_finder(string itemName);
 int itemStat(int rowLine, string abilityType);
+int itemComboCrafter(string abilityType, string ignoreItem);
 string stringFinder(int rowLine);
 void itemPrefix_specifier(string abilityspecifier);
-void highestStat_Finder(string abilityType, string itemType);
+void highestStat_Finder(string abilityType, string itemType, string ignoreItemOnce);
 string getItemName_fromrowLine(int rowLine);
 int totalItemStatCalculator();
 void bastardMisspelled();
@@ -29,7 +30,9 @@ string itemsNameArray[6];
 int comboItemStatArray[6];
 string comboItemNameArray[6];
 string highestStatItemName_Array[100];
-double comboVal;
+string highestItemStatCombo_Array[5];
+string ignoreItemArray[10];
+int comboVal = 0;
 string itemPrefix;
 int itemStatusNumber;
 int arrayWhatToShow = 0;
@@ -136,61 +139,132 @@ void option3() {
     string abilityType;
     string itemType;
     generalValueforOption3 = 0;
+    string ignoreItem = "none";
 
     cout << "\nEnter either Mythic or Legendary: ";
     cin >> itemType;
     cout << "\nEnter item stat to get highest item for: ";
     cin >> abilityType;
-    highestStat_Finder(abilityType, itemType);
-    cout << arrayWhatToShow << endl;
-    cout << "The item(s) with the highest " << abilityType;
-    if(arrayWhatToShow == 0) {cout << " is:\n";}
-    else{cout << " are:\n";} 
-    for(int i=0; i<=arrayWhatToShow; i++) {
-        cout << "-" << highestStatItemName_Array[i] << "\n";
+    cout << "\nWant to ignore any item? Y/N:\n";
+    cin >> ignoreItem;
+    if(ignoreItem == "Y") {
+        cin.clear();
+        cout << "Enter name of item to ignore: ";
+        cin >> ignoreItem;
     }
-    itemPrefix_specifier(abilityType);
-    cout << "with " << generalValueforOption3 << " " << itemPrefix << endl;
+    else {ignoreItem == "none";}
+
+    highestStat_Finder(abilityType, itemType, ignoreItem);
+    //cout << arrayWhatToShow << endl;
+    if(generalValueforOption3 == 0) {
+        cout << "No " << itemType << " item has that item stat." << endl;
+    }
+    else {
+        cout << "The item(s) with the highest " << abilityType;
+        if(arrayWhatToShow == 0) {cout << " is:\n";}
+        else{cout << " are:\n";} 
+        for(int i=0; i<=arrayWhatToShow; i++) {
+            cout << "-" << highestStatItemName_Array[i] << "\n";
+        }
+        itemPrefix_specifier(abilityType);
+        cout << "with " << generalValueforOption3 << " " << itemPrefix << endl;
+    }
 
 }
 
 void option4() {
     //Find best combination of 1 mythic and 4 legendary to get an item stat as high as possible.
     string AbilityType;
+    string ignoreItem = "none";
+    ignoreItemArray[0] = "none";
+    ignoreItemArray[1] = "none";
+    ignoreItemArray[2] = "none";
+    ignoreItemArray[3] = "none";
+    ignoreItemArray[4] = "none";
 
+    cout << "\nEnter item stat you want the best combo for: ";
+    cin >> AbilityType;
+    cout << "\nIs there any item you want to ignore? Y/N: ";
+    cin >> ignoreItem;
+    if(ignoreItem == "Y") {
+        cin.clear();
+        cout << "\nEnter item name to ignore: ";
+        cin >> ignoreItem;
+        itemComboCrafter(AbilityType, ignoreItem);
+
+    }  
+    else {
+        itemComboCrafter(AbilityType, ignoreItem);
+    }
+    cout << "\nProcessing.";
+    for (int i=0; i<2; i++) {cout << " .";Sleep(800);}
+    itemPrefix_specifier(AbilityType);
+    cout << "\n \n";
+    cout << "\nThe item combination with the highest " << AbilityType << " is:\n";
+    for(int n=0; n<=4; n++) {
+        cout << highestItemStatCombo_Array[n] << ", ";
+    }
+    cout << "\nWith a total value of: " << comboVal << " " << itemPrefix << endl;
 
 }
 
-int randomItem_Selector(string itemType) {
+int itemComboCrafter(string abilityType, string ignoreItem) {
     //Returns a rowLine for a random item depending on the itemType (either mythic or legendary)
     int rowLine;
-    srand (time(NULL));
-    Sleep(200);
-    if(itemType == "Mythic") {
-        rowLine = rand() % 23 + 2; //24
+    int n = 0;
+    string iterationLine;
+    comboVal = 0;
+        
+    highestStat_Finder(abilityType, "Mythic", ignoreItem);
+    highestItemStatCombo_Array[0] = highestStatItemName_Array[0];
+    // cout << highestItemStatCombo_Array[0] << endl;
 
-    }
-    else if(itemType == "Legendary") {
-        rowLine = rand() % 64 + 27 //90
-    }
+    for(int i=1; i<=4; i++) {
+        highestStat_Finder(abilityType, "Legendary", ignoreItem);
+        highestItemStatCombo_Array[i] = highestStatItemName_Array[0];
+        // cout << highestItemStatCombo_Array[i] << endl;
+        // ignoreItem = highestItemStatCombo_Array[i];
+        ignoreItemArray[i-1] = highestItemStatCombo_Array[i];
+        // i = i + n;
+        // cout << n << endl;
+        // out << "&" << ignoreItem << endl;
 
-    return rowLine;
+        Sleep(750);
+    }
+    for(n=0; n<=4; n++) {
+        iterationLine = highestItemStatCombo_Array[n];
+        comboVal = comboVal + itemStat(itemRow_finder(iterationLine), abilityType);
+    }
+    return 0;
 }
 
-void highestStat_Finder(string abilityType, string itemType, string ignoreItem) {
+void highestStat_Finder(string abilityType, string itemType, string ignoreItemOnce) {
     int var1;
     int var2;
     int i = 2;
     int arrayCount = 0;
     arrayWhatToShow = 0;
     string currentStatus = "notEqual";
+    int ignoreItemName = itemRow_finder(ignoreItemOnce);
+    int specialItemIgnore = 0;
+    int ArrSize = *(&ignoreItemArray + 1) - ignoreItemArray;
+    //cout << "--" << ignoreItemOnce << ignoreItemName << endl;
     
     if (itemType == "Mythic") {
         var1 = itemStat(i, abilityType);
+        if(i == ignoreItemName) {var1 = 0;}
+        for(int n=0; n<=(ArrSize-1); n++) {
+            specialItemIgnore = itemRow_finder(ignoreItemArray[n]);
+            if(i == specialItemIgnore) {var1 = 0;}
+        }
         highestStatItemName_Array[0] = getItemName_fromrowLine(i-1);
         for(i=3; i<=24; i++) {
             var2 = itemStat(i, abilityType);
-            //string function_result = Comparer_bigger(var1, var2);
+            if(i == ignoreItemName) {var2 = 0;}
+            for(int n=0; n<=(ArrSize-1); n++) {
+                specialItemIgnore = itemRow_finder(ignoreItemArray[n]);
+                if(i == specialItemIgnore) {var2 = 0;}
+            }
             if(var1>var2) {
                 //represents previous line
                 generalValueforOption3 = var1;
@@ -221,9 +295,20 @@ void highestStat_Finder(string abilityType, string itemType, string ignoreItem) 
     }
     else if (itemType == "Legendary") {
         var1 = itemStat(i, abilityType);
+        if(i == ignoreItemName) {var1 = 0;}
+        for(int n=0; n<=(ArrSize-1); n++) {
+            specialItemIgnore = itemRow_finder(ignoreItemArray[n]);
+            if(i == specialItemIgnore) {var1 = 0;}
+        }
+        //cout << "--- "<< getItemName_fromrowLine(ignoreItemName) << ignoreItemName << endl;
         highestStatItemName_Array[0] = getItemName_fromrowLine(i-1);
         for(i=27; i<=90; i++) {
             var2 = itemStat(i, abilityType);
+            if(i == ignoreItemName) {var2 = 0;}
+            for(int n=0; n<=(ArrSize-1); n++) {
+                specialItemIgnore = itemRow_finder(ignoreItemArray[n]);
+                if(i == specialItemIgnore) {var2 = 0;}
+            }
             //string function_result = Comparer_bigger(var1, var2);
             if(var1>var2) {
                 //represents previous line
@@ -253,6 +338,7 @@ void highestStat_Finder(string abilityType, string itemType, string ignoreItem) 
             }
         }
     }
+
 }
 
 string getItemName_fromrowLine(int rowLine) {
