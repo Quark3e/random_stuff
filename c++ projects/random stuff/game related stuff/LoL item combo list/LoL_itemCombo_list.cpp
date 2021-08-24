@@ -100,10 +100,11 @@ void option1() {
     cin >> abilityType;
     itemStatusNumber = 0;
     itemStat(itemRow_finder(itemName), abilityType);
+    itemPrefix_specifier(abilityType);
     if (itemStatusNumber == 69) {return;}
     //else {
-        cout << "\n" << itemName << ": " << abilityType << "=\n";
-        cout << itemStatusNumber << endl;
+        cout << "\n" << itemName << ": " << abilityType << " =\n";
+        cout << itemStatusNumber << " " << itemPrefix << endl;
     //}
 
 }
